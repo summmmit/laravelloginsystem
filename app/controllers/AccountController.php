@@ -16,6 +16,9 @@ class AccountController extends BaseController
     public function postCreate(){
         $validator = Validator::make(Input::all(),
             array(
+                'company_name' => 'required|max:50',
+                'country' => 'required|max:50',
+                'state' => 'required|max:50',
                 'email' => 'required|max:50|email|unique:users',
                 'username' => 'required|max:20|min:3|unique:users',
                 'password' => 'required|min:6',
@@ -28,6 +31,10 @@ class AccountController extends BaseController
                 ->withInput();
         }else{
 
+            $company_name         = Input::get('company_name');
+            $address         = Input::get('address');
+            $country         = Input::get('country');
+            $state         = Input::get('state');
             $email         = Input::get('email');
             $username         = Input::get('username');
             $password       = Input::get('password');
@@ -36,6 +43,10 @@ class AccountController extends BaseController
             $code = str_random(60);
 
             $create = User::create(array(
+                'company_name'    => $company_name,
+                'address'    => $address,
+                'country'    => $country,
+                'state'    => $state,
                 'email'    => $email,
                 'username' => $username,
                 'password' => Hash::make($password),
@@ -51,6 +62,10 @@ class AccountController extends BaseController
                         });
                 return Redirect::route('home')
                     ->with('global' , 'Your account has been createde u can activate now');
+            }else{
+
+                return Redirect::route('home')
+                    ->with('global', 'Cant create your Account. Try Later');
             }
         }
 

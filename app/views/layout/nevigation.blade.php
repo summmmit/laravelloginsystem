@@ -5,6 +5,7 @@
             <li><a href="{{ URL::route('profile-user') }}">User Profile</a></li>
             <li><a href="{{ URL::route('account-change-password') }}">Change Password</a></li>
             <li><a href="{{ URL::route('account-sign-out') }}">Sign-Out</a></li>
+            <li><a href="{{ URL::route('company-infrastructure') }}">See Building Infrastructure</a></li>
             @else
             <li><a href="{{ URL::route('account-sign-in') }}">Sign-In</a></li>
             <li><a href="{{ URL::route('account-forgot-password') }}">Forgot Password</a></li>

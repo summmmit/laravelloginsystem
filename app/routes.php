@@ -20,8 +20,31 @@ Route::group(array('before' => 'auth'), function(){
             'as'  => 'account-change-password-post',
             'uses' => 'AccountController@postChangePassword'
         ));
+        /*
+         * Add Company Infrastructure (post)
+         */
+        Route::Post('/company/infrastructure/buildings', array(
+            'as'  => 'company-infrastructure-buildings-post',
+            'uses' => 'BuildingController@postBuildings'
+        ));
+        /*
+         * Add floor to the Building (post)
+         */
+        Route::Post('/company/building/floor', array(
+            'as'  => 'company-building-floor-post',
+            'uses' => 'BuildingController@postFloor'
+        ));
+        /*
+         * Add room to the floor (post)
+         */
+        Route::Post('/company/floor/room', array(
+            'as'  => 'company-floor-room-post',
+            'uses' => 'BuildingController@postRoom'
+        ));
     });
     /*
+     * non - protection Routes
+     *
      * SignOUt (get)
      */
     Route::get('/account/sign-out', array(
@@ -41,6 +64,41 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('/user/profile', array(
         'as'  => 'profile-user',
         'uses' => 'ProfileController@user'
+    ));
+    /*
+     * Add Company Infrastructure (get)
+     */
+    Route::get('/company/infrastructure', array(
+        'as'  => 'company-infrastructure',
+        'uses' => 'BuildingController@getInfrastructure'
+    ));
+    /*
+     * Add building (get)
+     */
+    Route::get('/company/infrastructure/buildings', array(
+        'as'  => 'company-infrastructure-buildings',
+        'uses' => 'BuildingController@getBuildings'
+    ));
+    /*
+     *  floors to the building (get)
+     */
+    Route::get('/company/building/floor', array(
+        'as'  => 'company-building-floor',
+        'uses' => 'BuildingController@getFloor'
+    ));
+    /*
+     * Add floor to the building (get)
+     */
+    Route::get('/company/building/floor/create', array(
+        'as'  => 'company-building-floor-create',
+        'uses' => 'BuildingController@getCreateFloor'
+    ));
+    /*
+     * for test oonly (get)
+     */
+    Route::get('/company/building/floor/create', array(
+        'as'  => 'company-building-floor-create',
+        'uses' => 'BuildingController@getCreateFloor'
     ));
 
 });
